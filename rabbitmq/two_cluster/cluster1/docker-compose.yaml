@@ -1,0 +1,46 @@
+version: '3.6'
+
+networks:
+  default:
+    external:
+      name: rabbitmq-cluster
+
+services:
+  rabbitmq-01:
+    image: rabbitmq:3.8.3
+    hostname: rabbitmq-01
+    environment:
+      - RABBITMQ_DEFAULT_USER=admin
+      - RABBITMQ_DEFAULT_PASS=guest
+      - RABBITMQ_ERLANG_COOKIE="MY-SECRET-KEY-123"
+    volumes:
+      - ./definitions.json:/etc/rabbitmq/definitions.json
+    ports:
+      - '5672:5672'
+      - '15672:15672'
+
+  rabbitmq-02:
+    image: rabbitmq:3.8.3
+    hostname: rabbitmq-02
+    environment:
+      - RABBITMQ_DEFAULT_USER=admin
+      - RABBITMQ_DEFAULT_PASS=guest
+      - RABBITMQ_ERLANG_COOKIE="MY-SECRET-KEY-123"
+    volumes:
+      - ./definitions.json:/etc/rabbitmq/definitions.json
+    ports:
+      - '5673:5672'
+      - '15673:15672'
+
+  rabbitmq-03:
+    image: rabbitmq:3.8.3
+    hostname: rabbitmq-03
+    environment:
+      - RABBITMQ_DEFAULT_USER=admin
+      - RABBITMQ_DEFAULT_PASS=guest
+      - RABBITMQ_ERLANG_COOKIE="MY-SECRET-KEY-123"
+    volumes:
+      - ./definitions.json:/etc/rabbitmq/definitions.json
+    ports:
+      - '5674:5672'
+      - '15674:15672'
